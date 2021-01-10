@@ -54,6 +54,7 @@ class ServerlessStepFunctionsLocal {
   async startStepFunctions() {
     this.stepfunctionsServer.start({
       account: this.config.accountId.toString(),
+      region: this.config.region,
       lambdaEndpoint: this.config.lambdaEndpoint
     }).on('data', data => {
       console.log(chalk.blue('[Serverless Step Functions Local]'), data.toString());
@@ -80,7 +81,7 @@ class ServerlessStepFunctionsLocal {
 
     this.stateMachines = parsed.stepFunctions.stateMachines;
 
-    if (parsed.custom 
+    if (parsed.custom
       && parsed.custom.stepFunctionsLocal
       && parsed.custom.stepFunctionsLocal.TaskResourceMapping) {
         this.replaceTaskResourceMappings(parsed.stepFunctions.stateMachines, parsed.custom.stepFunctionsLocal.TaskResourceMapping);
